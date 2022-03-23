@@ -1,0 +1,10 @@
+tips:
+1.element表单form中只有一个输入框，在输入框中按下回车就是提交该表单，且会刷新页面。阻止这一默认行为，可以在form标签上添加@submit.native.prevent
+<el-form
+  @submit.native.prevent
+  :model="yourform"
+  ref="yourform"
+  :inline="true"
+  label-width="90px"
+  class="your-form"
+></el-form>
