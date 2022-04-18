@@ -8,3 +8,12 @@ tips:
   label-width="90px"
   class="your-form"
 ></el-form>
+
+2.把一个数组固定抽取几个元素出来单独成为一个数组，比如把 5个元素的数组，2个2个的编为一个数组，最后不足2个的也单独成为一个数组，再用一个大数组包裹起来
+split_array(arr, len){
+      var a_len = arr.length;
+      var result = [];
+      for(var i=0;i<a_len;i+=len){
+        result.push(arr.slice(i,i+len));
+      }
+    },
