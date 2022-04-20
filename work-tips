@@ -17,3 +17,122 @@ split_array(arr, len){
         result.push(arr.slice(i,i+len));
       }
     },
+    
+ 3.element-tree 样式修改
+ <el-tree
+  :highlight-current="true"
+  :indent="0"
+  :data="deptOptions"
+  :props="defaultProps"
+  :expand-on-click-node="false"
+  :filter-node-method="filterNode"
+  ref="tree"
+  default-expand-all
+  @node-click="handleNodeClick"
+/>
+增加虚线时，indent="0"，必须要有
+
+//虚线的样式 ， head-container为父盒子
+::v-deep .head-container {
+  .el-tree--highlight-current
+    .el-tree-node.is-current
+    > .el-tree-node__content {
+    background-color: #ffffff !important;
+    span {
+      color: #3171ee !important;
+    }
+    .el-tree-node__expand-icon.is-leaf::before {
+      background: url("../../../assets/images/icon_child_act.png") no-repeat 0;
+      content: "";
+      display: block;
+      width: 16px;
+      height: 16px;
+      font-size: 16px;
+      background-size: 16px;
+    }
+  }
+  .el-tree > .el-tree-node:after {
+    border-top: none;
+  }
+  .el-tree-node {
+    position: relative;
+    padding-left: 16px;
+  }
+  //节点有间隙，隐藏掉展开按钮就好了,如果觉得空隙没事可以删掉
+  // .el-tree-node__expand-icon.is-leaf{
+  //   display: none;
+  // }
+  .el-tree-node__children {
+    padding-left: 16px;
+  }
+  .el-tree-node :last-child:before {
+    height: 38px;
+  }
+  // .el-tree > .el-tree-node:before {
+  //   border-left: none;
+  // }
+  .el-tree > .el-tree-node:after {
+    border-top: none;
+  }
+  .el-tree-node:before {
+    content: "";
+    left: -4px;
+    position: absolute;
+    right: auto;
+    border-width: 1px;
+  }
+  .el-tree-node:after {
+    content: "";
+    left: -4px;
+    position: absolute;
+    right: auto;
+    border-width: 1px;
+  }
+  .el-tree-node:before {
+    border-left: 1px dashed #d7d9de;
+    bottom: 0px;
+    height: 100%;
+    top: -26px;
+    width: 1px;
+  }
+  .el-tree-node:after {
+    border-top: 1px dashed #d7d9de;
+    height: 20px;
+    top: 12px;
+    width: 24px;
+  }
+}
+//增加图标
+//有子节点 且未展开
+.el-tree ::v-deep .el-icon-caret-right:before {
+  background: url("../../../assets/images/icon_jia.png") no-repeat 0;
+  content: "";
+  display: block;
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+  background-size: 16px;
+}
+//有子节点 且已展开
+.el-tree
+  ::v-deep
+  .el-tree-node__expand-icon.expanded.el-icon-caret-right:before {
+  background: url("../../../assets/images/icon_jian.png") no-repeat 0;
+  content: "";
+  display: block;
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+  background-size: 16px;
+}
+//没有子节点
+.el-tree ::v-deep .el-tree-node__expand-icon.is-leaf::before {
+  background: url("../../../assets/images/icon_child_nage.png") no-repeat 0;
+  content: "";
+  display: block;
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+  background-size: 16px;
+}
+
